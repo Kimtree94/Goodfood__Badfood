@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 카카오 map -->
+<p style="margin-top:-12px">
+    사용한 데이터를 보시려면
+    <em class="link">
+        <a href="/download/web/data/chicken.json" target="_blank">여기를 클릭하세요!</a>
+    </em>
+</p>
+<div id="map" style="width:100%;height:350px;"></div>
+<!-- 위반음식점 리스트 -->
+  <div>
+      <table class="badfoodt">
+
+      </table>
+
+  </div>
+<!-- 모범 음식점 리스트 -->
+  <div>
+      <table class="goodfoodt">
+
+
+
+      </table>
+  </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b632f1626486adf53fd1d55afa4835c4&libraries=clusterer"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="/js/Food.js"></script>
+</body>
+</html>
