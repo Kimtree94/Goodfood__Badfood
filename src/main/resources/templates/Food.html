@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/Css/Food.css">
 </head>
 <body>
+
+
+<div class="page-wrapper">
+    <a class="btn trigger" >Click Me!</a>
+</div>
+<div class="modal-wrapper">
+    <div class="modal">
+        <div class="head">
+            <a class="btn-close trigger" href="javascript:;"></a>
+        </div>
+        <div class="content">
+            <table class="modaltable">
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
 <!-- 카카오 map -->
-<p style="margin-top:-12px">
-    사용한 데이터를 보시려면
-    <em class="link">
-        <a href="/download/web/data/chicken.json" target="_blank">여기를 클릭하세요!</a>
-    </em>
-</p>
-<div id="map" style="width:100%;height:350px;"></div>
+
+<div id="map" style="width:100%;height:721px;"></div>
 <!-- 위반음식점 리스트 -->
   <div>
       <table class="badfoodt">
@@ -24,10 +40,11 @@
   <div>
       <table class="goodfoodt">
 
-
-
       </table>
   </div>
+
+
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b632f1626486adf53fd1d55afa4835c4&libraries=clusterer"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="/js/Food.js"></script>
