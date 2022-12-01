@@ -16,11 +16,7 @@ var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표�
     });
 
 
-
-
-
-
-    // 데이터를 가져오기 위해 jQuery를 사용합니다
+// 데이터를 가져오기 위해 jQuery를 사용합니다
     // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
     $.get("/foodinfo/badfood", function(data) {
 

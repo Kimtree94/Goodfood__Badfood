@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/Css/Food.css">
 </head>
 <body>
 
 
 <div class="page-wrapper">
-    <a class="btn trigger" >Click Me!</a>
+    <a class="btn trigger">Click Me!</a>
 </div>
 <div class="modal-wrapper">
     <div class="modal">
@@ -22,7 +23,26 @@
 
 
             </table>
-             나의 평가!!<input type="text" class="form-control" >
+            <form class="mb-3" name="myform" id="myform" method="post">
+                <fieldset>
+                    <span class="text-bold">별점을 선택해주세요</span>
+                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                        for="rate1" >★</label>
+                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                        for="rate2">★</label>
+                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                        for="rate3">★</label>
+                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                        for="rate4">★</label>
+                    <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                        for="rate5">★</label>
+                </fieldset>
+                <div>
+	    	<textarea class="col-auto form-control" type="text" id="reviewContents"
+                  placeholder="고객님의 소중한 후기를 남겨주세요!!"></textarea>
+                </div>
+                <button type="button" class="form-control" onclick="storepoint()">등록하기!!</button>
+            </form>
         </div>
     </div>
 </div>
@@ -32,23 +52,23 @@
 
 <div id="map" style="width:100%;height:721px;"></div>
 <!-- 위반음식점 리스트 -->
-  <div>
-      <table class="badfoodt">
+<div>
+    <table class="badfoodt">
 
-      </table>
+    </table>
 
-  </div>
+</div>
 <!-- 모범 음식점 리스트 -->
-  <div>
-      <table class="goodfoodt">
+<div>
+    <table class="goodfoodt">
 
-      </table>
-  </div>
+    </table>
+</div>
 
 
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b632f1626486adf53fd1d55afa4835c4&libraries=clusterer"></script>
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="/js/Food.js"></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b632f1626486adf53fd1d55afa4835c4&libraries=clusterer"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/Food.js"></script>
 </body>
 </html>

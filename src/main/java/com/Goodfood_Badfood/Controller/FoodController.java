@@ -28,6 +28,8 @@ public class FoodController {
         return new ClassPathResource("templates/kakaoMap.html");
     }
 
+
+
     @GetMapping("/badfood")
     public List badfood() throws IOException {
         System.out.println("\n"+foodService.badfood());
@@ -39,4 +41,8 @@ public class FoodController {
         System.out.println("\n"+foodService.goodfood());
         return foodService.goodfood();
     }
+   /* @GetMapping("/point")
+    public boolean storepoint(){
+        return foodService.storepoint();
+    }*/
 }
