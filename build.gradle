@@ -28,6 +28,3 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'//스프링 메일전송 SMTP
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}

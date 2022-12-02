@@ -1,5 +1,9 @@
 package com.Goodfood_Badfood.service;
 
+import com.Goodfood_Badfood.domain.dto.PointDto;
+import com.Goodfood_Badfood.domain.entity.PointEntity;
+import com.Goodfood_Badfood.domain.entity.PointRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +14,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class FoodService {
+
+    /*////////////////////////////*/
+    @Autowired
+    PointRepository pointRepository;
+
+
+    /*////////////////////////////*/
     @Transactional
     public List badfood() throws IOException {
         List list = new ArrayList<>();
@@ -57,5 +69,17 @@ public class FoodService {
         urlConnection.disconnect();
         list.add(result);
         return list;
+    }
+
+    @Transactional
+    public boolean storepoint(PointDto pointDto) {
+        System.out.println("pno***");
+        System.out.println(pointDto);
+        if (pointDto.getPoint()== 0) {
+            return false;
+        } else {
+            PointEntity pent = pointRepository.save(pointDto.toEntity());
+            return true;
+        }
     }
 }

@@ -1,13 +1,13 @@
-package com.Goodfood_Badfood.Controller;
+package com.Goodfood_Badfood.controller;
 
+import com.Goodfood_Badfood.domain.dto.PointDto;
 import com.Goodfood_Badfood.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,17 +32,16 @@ public class FoodController {
 
     @GetMapping("/badfood")
     public List badfood() throws IOException {
-        System.out.println("\n"+foodService.badfood());
         return foodService.badfood();
     }
 
     @GetMapping("/goodfood")
     public List goodfood() throws IOException {
-        System.out.println("\n"+foodService.goodfood());
         return foodService.goodfood();
     }
-   /* @GetMapping("/point")
-    public boolean storepoint(){
-        return foodService.storepoint();
-    }*/
+   @PostMapping("/board")
+    public boolean storepoint(PointDto pointDto) {
+       System.out.println("pno확인용 :"+pointDto);
+       return foodService.storepoint(pointDto);
+   }
 }
