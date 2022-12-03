@@ -23,6 +23,8 @@ public class PointEntity {
     private String pname;
     @Column(nullable = false)
     private int point;
+    @Column(nullable = false)
+    private String stname;
 
     public PointDto toDto() {
         return PointDto.builder()
@@ -30,6 +32,7 @@ public class PointEntity {
                 .reviewContents(this.reviewContents)
                 .pname(this.pname)
                 .point(this.point)
+                .stname(this.stname)
                 .build();
     }
 }

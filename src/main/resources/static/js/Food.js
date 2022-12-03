@@ -12,7 +12,10 @@ var clusterer = new kakao.maps.MarkerClusterer({
     minLevel: 5 // 클러스터 할 최소 지도 레벨
 });
 
+/*************************************************전역변수******************************************************/
+let sname="";
 
+/*************************************************************************************************************/
 badfood()
 
 /*위반 음식점 리스트*/
@@ -29,6 +32,7 @@ function badfood() {
                 '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
                 '</tr>'
             for (let i = 0; i < object.data.length; i++) {
+                sname+=object.data[i].업소명;
                 html += '<tr>' +
                     '<th>' + object.data[i].업종명 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].처분명 + '</th><th>' + object.data[i].위반내용 + '</th>' +
                     '<th>' + object.data[i].처분내용 + '</th><th>' + object.data[i].처분일자 + '</th><th>' + object.data[i].처분기간 + '</th><th>' + object.data[i].관리기관 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th>' +
@@ -37,7 +41,7 @@ function badfood() {
             document.querySelector('.badfoodt').innerHTML = html;
         }
     })
-}
+}/*'<th style="display: none">' + i + '</th><th>'*/
 
 
 goodfood()
@@ -103,6 +107,7 @@ function getbadfood() {
                     let info = document.querySelector('.modaltable')
 
                     fooghtml = '<tr>' +
+                        '<input type="hidden" value="'+e.업소명+'" class="stname" name="stname">'+
                         '<th style="widt94px">업종명 :</th> <td>' + e.업종명 + '</td>' +
                         '</tr>' +
                         '<tr>' +
@@ -212,20 +217,36 @@ $(document).ready(function () {
 /*==============================================================================================================*/
 
 function storepoint() {
+    let stname =document.querySelector('.stname').value
     let form = document.querySelector('#myform')
     let data = new FormData(form)
     $.ajax({
-        url:"/foodinfo/board",
-        type:"post",
+        url: "/foodinfo/board",
+        type: "post",
         data: data,
-        contentType : false,
+        contentType: false,
         processData: false,
         success: function (re) {
-           if(re==true){
-             alert("후기가 등록되었습니다 감사합니다!!")
-            }else{
-              alert("후기 등록에 실패했습니다!!")
-           }
+            if (re == true) {
+                alert("후기가 등록되었습니다 감사합니다!!")
+                stboard();
+            } else {
+                alert("후기 등록에 실패했습니다!!")
+            }
+        }
+    })
+}
+function stboard(){
+    let form = document.querySelector('#myform')
+    let data = new FormData(form)
+    $.ajax({
+        url: "/foodinfo/stboard",
+        type: "get",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (re) {
+        console.log(re)
         }
     })
 }

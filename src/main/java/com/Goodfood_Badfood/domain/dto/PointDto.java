@@ -10,10 +10,11 @@ import lombok.*;
 @ToString
 @Builder
 public class PointDto {
-   private int pno; // 포인트
+   private int pno;
    private String reviewContents; // 후기
    private String pname; //닉네임
-   private int point;
+   private int point;// 포인트
+   private String stname;
 
    public PointEntity toEntity(){
       return PointEntity.builder()
@@ -21,6 +22,7 @@ public class PointDto {
               .reviewContents(this.reviewContents)
               .pname(this.pname)
               .point(this.point)
+              .stname(this.stname)
               .build();
    }
 }

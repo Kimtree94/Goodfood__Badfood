@@ -19,11 +19,11 @@
             <a class="btn-close trigger" href="javascript:;"></a>
         </div>
         <div class="content">
-            <table class="table modaltable">
 
-
-            </table>
             <form class="mb-3" name="myform" id="myform" method="post">
+                <table class="table modaltable">
+
+                </table>
                 <fieldset>
                     <span class="text-bold">별점을 선택해주세요</span>
                     <input type="radio" name="point" value="5" id="rate1"><label
@@ -40,10 +40,14 @@
                 <div>
                 <textarea class="col-auto form-control" name="reviewContents" type="text" id="reviewContents"
                           placeholder="고객님의 소중한 후기를 남겨주세요!!"></textarea>
-                    <input type="text" name="pname" class="pname" placeholder="닉네임">
+                    <input type="text" name="pname" class="pname form-control" placeholder="닉네임">
                 </div>
-                <button type="button" class="for-control" onclick="storepoint()">등록하기!!</button>
+                <button type="button" class="btn btn-dark sendpoint" onclick="storepoint()">등록하기!!</button>
             </form>
+            <table class="table stinfo">
+
+
+            </table>
         </div>
     </div>
 </div>
