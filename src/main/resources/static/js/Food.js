@@ -1,4 +1,6 @@
 /*************************************************카카오맵API******************************************************/
+stboard();
+
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center: new kakao.maps.LatLng(37.32186, 126.8308495), // 지도의 중심좌표
     level: 6 // 지도의 확대 레벨
@@ -13,7 +15,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
 });
 
 /*************************************************전역변수******************************************************/
-let sname="";
+let sname = "";
 
 /*************************************************************************************************************/
 badfood()
@@ -32,7 +34,7 @@ function badfood() {
                 '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
                 '</tr>'
             for (let i = 0; i < object.data.length; i++) {
-                sname+=object.data[i].업소명;
+                sname += object.data[i].업소명;
                 html += '<tr>' +
                     '<th>' + object.data[i].업종명 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].처분명 + '</th><th>' + object.data[i].위반내용 + '</th>' +
                     '<th>' + object.data[i].처분내용 + '</th><th>' + object.data[i].처분일자 + '</th><th>' + object.data[i].처분기간 + '</th><th>' + object.data[i].관리기관 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th>' +
@@ -105,9 +107,8 @@ function getbadfood() {
                 function openinformation(위도, 경도) { //모달 열기 이벤트,
                     document.querySelector(".trigger").click()//해당버튼을 누를때
                     let info = document.querySelector('.modaltable')
-
                     fooghtml = '<tr>' +
-                        '<input type="hidden" value="'+e.업소명+'" class="stname" name="stname">'+
+                        '<input type="hidden" value="' + e.업소명 + '" class="stname" name="stname">' +
                         '<th style="widt94px">업종명 :</th> <td>' + e.업종명 + '</td>' +
                         '</tr>' +
                         '<tr>' +
@@ -208,6 +209,7 @@ function getgdfood() {
 /*==============================================================================================================*/
 $(document).ready(function () {
     $('.trigger').click(function () {
+        stboard();
         $('.modal-wrapper').toggleClass('open');
         $('.page-wrapper').toggleClass('blur');
         return false;
@@ -217,7 +219,7 @@ $(document).ready(function () {
 /*==============================================================================================================*/
 
 function storepoint() {
-    let stname =document.querySelector('.stname').value
+    let stname = document.querySelector('.stname').value
     let form = document.querySelector('#myform')
     let data = new FormData(form)
     $.ajax({
@@ -229,24 +231,33 @@ function storepoint() {
         success: function (re) {
             if (re == true) {
                 alert("후기가 등록되었습니다 감사합니다!!")
-                stboard();
             } else {
                 alert("후기 등록에 실패했습니다!!")
             }
         }
     })
 }
-function stboard(){
+
+stboard();
+function stboard() {
     let form = document.querySelector('#myform')
     let data = new FormData(form)
+    let stinfo = document.querySelector('.stinfo');
     $.ajax({
         url: "/foodinfo/stboard",
-        type: "get",
+        type: "post",
         data: data,
         contentType: false,
         processData: false,
         success: function (re) {
-        console.log(re)
+            let food ="";
+            re.forEach((e) => {
+                food += '<tr>' +
+                    '<th style="widt94px">닉네임 :</th> <td>' + e.pname + '</td>' +
+                    '<th style="widt94px">내용 :</th> <td>' + e.reviewContents + '</td>' +
+                    '</tr>'
+            })
+            stinfo.innerHTML = food;
         }
     })
 }

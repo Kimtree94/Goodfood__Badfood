@@ -45,8 +45,6 @@ public class FoodService {
         }
         urlConnection.disconnect();
         list.add(result);
-        System.out.println("list");
-        System.out.println(list);
         return list;
     }
 
@@ -75,7 +73,7 @@ public class FoodService {
 
     @Transactional
     public boolean storepoint(PointDto pointDto) {
-        if (pointDto.getPoint()== 0) {
+        if (pointDto.getPoint() == 0) {
             return false;
         } else {
             PointEntity pent = pointRepository.save(pointDto.toEntity());
@@ -84,11 +82,16 @@ public class FoodService {
     }
 
     @Transactional
-    public List<PointDto> stboard(PointDto pointDto){
+    public List<PointDto> stboard(PointDto pointDto) {
+        System.out.println("확인하자-=====");
+        System.out.println(pointDto.getStname());
+        List<PointEntity> elist = pointRepository.findByStname(pointDto.getStname());
+        System.out.println(elist.toString());
+        List<PointDto> dlist = new ArrayList<>();
+        for (PointEntity entity : elist) {
+            dlist.add(entity.toDto());
+        }
         System.out.println(pointDto);
-        List<PointEntity> dlist = pointRepository.findByStname(pointDto.getStname());
-        System.out.println("확인용");
-        System.out.println(dlist);
-        return null;
+        return dlist;
     }
 }

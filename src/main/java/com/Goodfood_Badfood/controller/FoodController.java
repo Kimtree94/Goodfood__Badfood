@@ -47,7 +47,8 @@ public class FoodController {
 
     @PostMapping("/stboard") // 가게후기 리스트
     public List<PointDto> stboard(PointDto pointDto) {
-        System.out.println(pointDto);
+        System.out.println("확인");
+        System.out.println(foodService.stboard(pointDto));
         return foodService.stboard(pointDto);
     }
 }
