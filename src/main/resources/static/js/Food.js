@@ -58,13 +58,14 @@ function goodfood() {
                   console.log(JSON.parse(re[0]));*/
             let object = JSON.parse(re[0]);
             let html = '<tr>' +
-                '<th>업종명</th><th>업소명</th><th>소재지도로명주소</th><th>처분명</th><th>위반내용</th>' +
-                '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
+                '<th>분야명</th><th>행정읍면동</th><th>업소명</th><th>소재지도로명주소</th><th>소재지지번주소</th>' +
+                '<th>전화번호</th><th>주차여부</th><th>영업시간</th><th>관리기관</th><th>주메뉴</th><th>위도</th><th>경도</th>' +
                 '</tr>'
             for (let i = 0; i < object.data.length; i++) {
+                if(object.data[i].영업시간==null){object.data[i].영업시간="정보없음"}
                 html += '<tr>' +
-                    '<th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th><th>' + object.data[i].분야명 + '</th><th>' + object.data[i].소재지도로명주소 + '</th><th>' + object.data[i].소재지지번주소 + '</th>' +
-                    '<th>' + object.data[i].업소명 + '</th><th>' + object.data[i].영업시간 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].전화번호 + '</th><th>' + object.data[i].주메뉴 + '</th><th>' + object.data[i].주차여부 + '</th>' +
+                    '<th>' + object.data[i].분야명 + '</th><th>' + object.data[i].행정읍면동 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].소재지도로명주소 + '</th><th>' + object.data[i].소재지지번주소 + '</th>' +
+                    '<th>' + object.data[i].전화번호 + '</th><th>' + object.data[i].주차여부 + '</th><th>' + object.data[i].영업시간 + '</th><th>' + object.data[i].주메뉴 + '</th><th>' + object.data[i].위도 + '</th> <th>' + object.data[i].경도 + '</th><th>' +
                     '</tr>'
             }
             document.querySelector('.goodfoodt').innerHTML = html;
@@ -107,7 +108,9 @@ function getbadfood() {
                 function openinformation(위도, 경도) { //모달 열기 이벤트,
                     document.querySelector(".trigger").click()//해당버튼을 누를때
                     let info = document.querySelector('.modaltable')
-                    fooghtml = '<tr>' +
+                    document.querySelector('.Stitle').innerHTML=e.업소명
+                    fooghtml =
+                        '<tr>' +
                         '<input type="hidden" value="' + e.업소명 + '" class="stname" name="stname">' +
                         '<th style="widt94px">업종명 :</th> <td>' + e.업종명 + '</td>' +
                         '</tr>' +
@@ -128,6 +131,7 @@ function getbadfood() {
                         '</tr>'
 
                     info.innerHTML = fooghtml
+                    Bad(info);
                 }//모달내 내용 띄우기
             });//카카오 이벤트 리스너
             return marker;
@@ -229,7 +233,7 @@ function storepoint() {
         contentType: false,
         processData: false,
         success: function (re) {
-            if (re == true) {
+            if (re===true) {
                 alert("후기가 등록되었습니다 감사합니다!!")
             } else {
                 alert("후기 등록에 실패했습니다!!")
@@ -239,6 +243,7 @@ function storepoint() {
 }
 
 stboard();
+
 function stboard() {
     let form = document.querySelector('#myform')
     let data = new FormData(form)
@@ -250,7 +255,7 @@ function stboard() {
         contentType: false,
         processData: false,
         success: function (re) {
-            let food ="";
+            let food = "";
             re.forEach((e) => {
                 food += '<tr>' +
                     '<th style="widt94px">닉네임 :</th> <td>' + e.pname + '</td>' +
@@ -261,4 +266,11 @@ function stboard() {
         }
     })
 }
+/*//////////////////////////////////////음식점리스트 나누기///////////////////////////*/
+function Bad(info){
+    document.querySelector('.badfoodt').style.display="block"
+}
+
+/*/////////////////////////////////////페이징 처리 ///////////////////////////*/
+
 
