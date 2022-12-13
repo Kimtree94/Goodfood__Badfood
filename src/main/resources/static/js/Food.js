@@ -15,7 +15,9 @@ var clusterer = new kakao.maps.MarkerClusterer({
 });
 
 /*************************************************전역변수******************************************************/
-let sname = "";
+let nowpage= 1;
+let allpage = 0;
+let limitpage = 10;
 
 /*************************************************************************************************************/
 badfood()
@@ -29,12 +31,16 @@ function badfood() {
             /*  console.log(typeof(re[0]));
               console.log(JSON.parse(re[0]));*/
             let object = JSON.parse(re[0]);
+            console.log("===============================")
+            console.log(object)
+            console.log("-------------------------------")
+            console.log(object.data)
+            console.log("////////////////////////////////")
             let html = '<tr>' +
                 '<th>업종명</th><th>업소명</th><th>처분명</th><th>위반내용</th>' +
                 '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
                 '</tr>'
-            for (let i = 0; i < object.data.length; i++) {
-                sname += object.data[i].업소명;
+            for (let i = object.data.length-1; i >=0; i=10) {
                 html += '<tr>' +
                     '<th>' + object.data[i].업종명 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].처분명 + '</th><th>' + object.data[i].위반내용 + '</th>' +
                     '<th>' + object.data[i].처분내용 + '</th><th>' + object.data[i].처분일자 + '</th><th>' + object.data[i].처분기간 + '</th><th>' + object.data[i].관리기관 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th>' +
@@ -47,6 +53,8 @@ function badfood() {
 
 
 goodfood()
+
+
 
 /*모범 음식점 리스트*/
 function goodfood() {
@@ -80,7 +88,7 @@ function getbadfood() {
     // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
     $.get("/foodinfo/badfood", function (data) {
         let object = JSON.parse(data[0]);
-        console.log(object.data[0])
+        (object.data[0])
         // 데이터에서 좌표 값을 가지고 마커를 표시합니다
         // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
         var markers = object.data.map((e) => {
@@ -148,7 +156,7 @@ function getgdfood() {
     // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
     $.get("/foodinfo/goodfood", function (data) {
         let object = JSON.parse(data[0]);
-        console.log(object.data[0])
+        (object.data[0])
         // 데이터에서 좌표 값을 가지고 마커를 표시합니다
         // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
         var markers = object.data.map((e) => {
