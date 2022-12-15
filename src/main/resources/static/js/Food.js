@@ -15,12 +15,13 @@ var clusterer = new kakao.maps.MarkerClusterer({
 });
 
 /*************************************************전역변수******************************************************/
-let nowpage= 1;
+let nowpage = document.querySelector('.Page');
 let allpage = 0;
 let limitpage = 10;
 
 /*************************************************************************************************************/
-badfood()
+
+badfood();
 
 /*위반 음식점 리스트*/
 function badfood() {
@@ -31,16 +32,12 @@ function badfood() {
             /*  console.log(typeof(re[0]));
               console.log(JSON.parse(re[0]));*/
             let object = JSON.parse(re[0]);
-            console.log("===============================")
-            console.log(object)
-            console.log("-------------------------------")
-            console.log(object.data)
-            console.log("////////////////////////////////")
+
             let html = '<tr>' +
                 '<th>업종명</th><th>업소명</th><th>처분명</th><th>위반내용</th>' +
                 '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
                 '</tr>'
-            for (let i = object.data.length-1; i >=0; i=10) {
+            for (let i =0;i< object.data.length; i++) {
                 html += '<tr>' +
                     '<th>' + object.data[i].업종명 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].처분명 + '</th><th>' + object.data[i].위반내용 + '</th>' +
                     '<th>' + object.data[i].처분내용 + '</th><th>' + object.data[i].처분일자 + '</th><th>' + object.data[i].처분기간 + '</th><th>' + object.data[i].관리기관 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th>' +
@@ -53,7 +50,6 @@ function badfood() {
 
 
 goodfood()
-
 
 
 /*모범 음식점 리스트*/
@@ -70,7 +66,9 @@ function goodfood() {
                 '<th>전화번호</th><th>주차여부</th><th>영업시간</th><th>관리기관</th><th>주메뉴</th><th>위도</th><th>경도</th>' +
                 '</tr>'
             for (let i = 0; i < object.data.length; i++) {
-                if(object.data[i].영업시간==null){object.data[i].영업시간="정보없음"}
+                if (object.data[i].영업시간 == null) {
+                    object.data[i].영업시간 = "정보없음"
+                }
                 html += '<tr>' +
                     '<th>' + object.data[i].분야명 + '</th><th>' + object.data[i].행정읍면동 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].소재지도로명주소 + '</th><th>' + object.data[i].소재지지번주소 + '</th>' +
                     '<th>' + object.data[i].전화번호 + '</th><th>' + object.data[i].주차여부 + '</th><th>' + object.data[i].영업시간 + '</th><th>' + object.data[i].주메뉴 + '</th><th>' + object.data[i].위도 + '</th> <th>' + object.data[i].경도 + '</th><th>' +
@@ -116,7 +114,7 @@ function getbadfood() {
                 function openinformation(위도, 경도) { //모달 열기 이벤트,
                     document.querySelector(".trigger").click()//해당버튼을 누를때
                     let info = document.querySelector('.modaltable')
-                    document.querySelector('.Stitle').innerHTML=e.업소명
+                    document.querySelector('.Stitle').innerHTML = e.업소명
                     fooghtml =
                         '<tr>' +
                         '<input type="hidden" value="' + e.업소명 + '" class="stname" name="stname">' +
@@ -241,7 +239,7 @@ function storepoint() {
         contentType: false,
         processData: false,
         success: function (re) {
-            if (re===true) {
+            if (re === true) {
                 alert("후기가 등록되었습니다 감사합니다!!")
             } else {
                 alert("후기 등록에 실패했습니다!!")
@@ -274,9 +272,10 @@ function stboard() {
         }
     })
 }
+
 /*//////////////////////////////////////음식점리스트 나누기///////////////////////////*/
-function Bad(info){
-    document.querySelector('.badfoodt').style.display="block"
+function Bad(info) {
+    document.querySelector('.badfoodt').style.display = "block"
 }
 
 /*/////////////////////////////////////페이징 처리 ///////////////////////////*/

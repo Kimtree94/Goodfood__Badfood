@@ -207,6 +207,10 @@ a.btn {
     font-family: 'BMHANNAPro';
 }
 
+.BadButton{
+    width: 50%;
+}
+
 /*위반음식점 리스트 */
 .badfoodt{
     display: none;
