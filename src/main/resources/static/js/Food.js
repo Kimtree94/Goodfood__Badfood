@@ -18,10 +18,36 @@ var clusterer = new kakao.maps.MarkerClusterer({
 let nowpage = document.querySelector('.Page');
 let allpage = 0;
 let limitpage = 10;
-
+let show1 = false;
 /*************************************************************************************************************/
+console.log(show1)
 
-badfood();
+let badfoodt  =document.querySelector('#badfoodt')
+let goodfoodt = document.querySelector('#goodfoodt')
+
+let GoodButton = document.querySelector('.GoodButton')
+let BadButton = document.querySelector('.BadButton')
+
+BadButton.addEventListener('click', (e) => {
+    console.log(badfoodt.style.display);
+    if(badfoodt.style.display!="none"){
+        badfoodt.style.display = "none";
+    }else{
+        badfood();
+        badfoodt.style.display = "block";
+    }
+});
+
+GoodButton.addEventListener('click',(e)=>{
+    console.log(goodfoodt.style.display);
+    if(goodfoodt.style.display!="none"){
+        goodfoodt.style.display="none";
+    }else{
+        goodfood();
+        goodfoodt.style.display="block";
+    }
+})
+
 
 /*위반 음식점 리스트*/
 function badfood() {
@@ -37,19 +63,16 @@ function badfood() {
                 '<th>업종명</th><th>업소명</th><th>처분명</th><th>위반내용</th>' +
                 '<th>처분내용</th><th>처분일자</th><th>처분기간</th><th>관리기관</th><th>위도</th><th>경도</th><th>데이터기준일자</th>' +
                 '</tr>'
-            for (let i =0;i< object.data.length; i++) {
+            for (let i = 0; i < object.data.length; i++) {
                 html += '<tr>' +
                     '<th>' + object.data[i].업종명 + '</th><th>' + object.data[i].업소명 + '</th><th>' + object.data[i].처분명 + '</th><th>' + object.data[i].위반내용 + '</th>' +
                     '<th>' + object.data[i].처분내용 + '</th><th>' + object.data[i].처분일자 + '</th><th>' + object.data[i].처분기간 + '</th><th>' + object.data[i].관리기관 + '</th><th>' + object.data[i].위도 + '</th><th>' + object.data[i].경도 + '</th><th>' + object.data[i].데이터기준일자 + '</th>' +
                     '</tr>'
             }
-            document.querySelector('.badfoodt').innerHTML = html;
+            document.querySelector('#badfoodt').innerHTML = html;
         }
     })
 }/*'<th style="display: none">' + i + '</th><th>'*/
-
-
-goodfood()
 
 
 /*모범 음식점 리스트*/
@@ -74,7 +97,7 @@ function goodfood() {
                     '<th>' + object.data[i].전화번호 + '</th><th>' + object.data[i].주차여부 + '</th><th>' + object.data[i].영업시간 + '</th><th>' + object.data[i].주메뉴 + '</th><th>' + object.data[i].위도 + '</th> <th>' + object.data[i].경도 + '</th><th>' +
                     '</tr>'
             }
-            document.querySelector('.goodfoodt').innerHTML = html;
+            document.querySelector('#badfoodt').innerHTML = html;
         }
     })
 }
@@ -137,7 +160,6 @@ function getbadfood() {
                         '</tr>'
 
                     info.innerHTML = fooghtml
-                    Bad(info);
                 }//모달내 내용 띄우기
             });//카카오 이벤트 리스너
             return marker;
