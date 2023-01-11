@@ -1,5 +1,4 @@
 /*************************************************카카오맵API******************************************************/
-stboard();
 
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center: new kakao.maps.LatLng(37.32186, 126.8308495), // 지도의 중심좌표
@@ -22,7 +21,7 @@ let show1 = false;
 /*************************************************************************************************************/
 console.log(show1)
 
-let badfoodt  =document.querySelector('#badfoodt')
+let badfoodt = document.querySelector('#badfoodt')
 let goodfoodt = document.querySelector('#goodfoodt')
 
 let GoodButton = document.querySelector('.GoodButton')
@@ -30,21 +29,21 @@ let BadButton = document.querySelector('.BadButton')
 
 BadButton.addEventListener('click', (e) => {
     console.log(badfoodt.style.display);
-    if(badfoodt.style.display!="none"){
+    if (badfoodt.style.display != "none") {
         badfoodt.style.display = "none";
-    }else{
+    } else {
         badfood();
         badfoodt.style.display = "block";
     }
 });
 
-GoodButton.addEventListener('click',(e)=>{
+GoodButton.addEventListener('click', (e) => {
     console.log(goodfoodt.style.display);
-    if(goodfoodt.style.display!="none"){
-        goodfoodt.style.display="none";
-    }else{
+    if (goodfoodt.style.display != "none") {
+        goodfoodt.style.display = "none";
+    } else {
         goodfood();
-        goodfoodt.style.display="block";
+        goodfoodt.style.display = "block";
     }
 })
 
@@ -54,6 +53,7 @@ function badfood() {
     $.ajax({
         url: "/foodinfo/badfood",
         type: "get",
+        processData: false,
         success: (re) => {
             /*  console.log(typeof(re[0]));
               console.log(JSON.parse(re[0]));*/
@@ -80,6 +80,7 @@ function goodfood() {
     $.ajax({
         url: "/foodinfo/goodfood",
         type: "get",
+        processData: false,
         success: (re) => {
             /*      console.log(typeof(re[0]));
                   console.log(JSON.parse(re[0]));*/
@@ -239,10 +240,10 @@ function getgdfood() {
 }
 
 /*==============================================================================================================*/
-$(document).ready(function () {
+$(document).ready(function () { // 모달열어주기
     $('.trigger').click(function () {
-        stboard();
         $('.modal-wrapper').toggleClass('open');
+        close(); // 후기리스트 초기화
         $('.page-wrapper').toggleClass('blur');
         return false;
     });
@@ -250,7 +251,7 @@ $(document).ready(function () {
 
 /*==============================================================================================================*/
 
-function storepoint() {
+function storepoint() {// 후기등록
     let stname = document.querySelector('.stname').value
     let form = document.querySelector('#myform')
     let data = new FormData(form)
@@ -263,6 +264,7 @@ function storepoint() {
         success: function (re) {
             if (re === true) {
                 alert("후기가 등록되었습니다 감사합니다!!")
+                location.href("/foodinfo/badgood");
             } else {
                 alert("후기 등록에 실패했습니다!!")
             }
@@ -270,9 +272,8 @@ function storepoint() {
     })
 }
 
-stboard();
 
-function stboard() {
+function stboard() { // 후기불러오기
     let form = document.querySelector('#myform')
     let data = new FormData(form)
     let stinfo = document.querySelector('.stinfo');
@@ -284,22 +285,29 @@ function stboard() {
         processData: false,
         success: function (re) {
             let food = "";
-            re.forEach((e) => {
-                food += '<tr>' +
-                    '<th style="widt94px">닉네임 :</th> <td>' + e.pname + '</td>' +
-                    '<th style="widt94px">내용 :</th> <td>' + e.reviewContents + '</td>' +
-                    '</tr>'
-            })
-            stinfo.innerHTML = food;
+            console.log(re)
+            if (re.length > 0) {
+                re.forEach((e) => {
+                    food += '<tr>' +
+                        '<th style="widt94px">닉네임 :</th> <td>' + e.pname + '</td>' +
+                        '<th style="widt94px">내용 :</th> <td>' + e.reviewContents + '</td>' +
+                        '</tr>'
+                })
+                    stinfo.innerHTML = food;
+            } else {
+                stinfo.innerHTML = "";
+                alert("등록된 후기가 없습니다ㅠ.ㅠ")
+            }
         }
     })
 }
 
-/*//////////////////////////////////////음식점리스트 나누기///////////////////////////*/
-function Bad(info) {
-    document.querySelector('.badfoodt').style.display = "block"
+function close(){ // 초기화 함수
+    let stinfo = document.querySelector('.stinfo');
+    stinfo.innerHTML="";
 }
 
-/*/////////////////////////////////////페이징 처리 ///////////////////////////*/
+
+
 
 

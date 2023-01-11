@@ -14,7 +14,7 @@ public class PointDto {
    private String reviewContents; // 후기
    private String pname; //닉네임
    private int point;// 포인트
-   private String stname;
+   private String stname; // 가게이름
 
    public PointEntity toEntity(){
       return PointEntity.builder()

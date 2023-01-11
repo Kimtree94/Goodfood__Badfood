@@ -45,6 +45,16 @@ a.btn {
     border-radius: 5px;
     background: rgba(217, 67, 86, 1);
 }
+.BadButton{
+    width: 40%;
+}
+.GoodButton{
+    width: 40%;
+}
+.ButtonEvent{
+    display: flex;
+    justify-content:space-around;
+}
 
 .modal-wrapper {
     width: 100%;
@@ -208,13 +218,14 @@ a.btn {
 }
 
 .BadButton{
-    width: 50%;
+    width: 40%;
 }
 .GoodButton{
-    width: 50%;
+    width: 40%;
 }
 .ButtonEvent{
     display: flex;
+    padding-top: 2%;
 }
 
 /*위반음식점 리스트 */
